@@ -1,0 +1,24 @@
+{
+  "name": "app-transitions-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server",
+    "dev": "nodemon server",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "Phạm Quyền",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "eslint": "^8.39.0",
+    "nodemon": "^2.0.22",
+    "typescript": "^5.0.4"
+  }
+}
