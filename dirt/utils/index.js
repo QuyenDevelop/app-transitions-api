@@ -1,15 +1,11 @@
-export const Utils = {
-    isValidEmail: (email) => {
-        return (email &&
-            new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$/g).test(email));
-    },
-    isValidPhone: (value) => {
-        return (value &&
-            new RegExp(/^[+]?\d{2,}?[(]?\d{2,}[)]?[-\s.]?\d{2,}?[-\s.]?\d{2,}[-\s.]?\d{0,9}$/im).test(value));
-    },
-    isValidPassword: (password) => {
-        return (password &&
-            new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/).test(password));
-    },
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthValidate = exports.Utils = void 0;
+const utils_1 = __importDefault(require("./utils"));
+exports.Utils = utils_1.default;
+var validation_1 = require("./validation");
+Object.defineProperty(exports, "AuthValidate", { enumerable: true, get: function () { return validation_1.AuthValidate; } });
 //# sourceMappingURL=index.js.map
