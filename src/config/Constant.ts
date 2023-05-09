@@ -1,0 +1,5 @@
+export const CONSTANT = {
+  AUTH_ERROR_CODE: {
+    IS_EMAIL_NOT_VALID: "IS_EMAIL_NOT_VALID",
+  },
+};

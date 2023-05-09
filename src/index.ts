@@ -20,11 +20,10 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 const server = http.createServer(app);
-const hostName = "localhost";
-const port = 3000;
+const port = 8000;
 
-server.listen(port, hostName, () => {
-  console.log("This is my first time");
+server.listen(port, () => {
+  console.log("This is server listening on http://localhost:8000/");
 });
 
 const uri_DB =
