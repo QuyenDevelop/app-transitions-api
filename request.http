@@ -1,5 +1,23 @@
+// ____ Authentication
+POST http://localhost:8000/auth/register
+Content-Type: application/json
+
+{
+    "username": "admin1",
+    "password": "admin123aA"
+}
+###
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin123aA"
+}
+###
 // ---- users
 GET http://localhost:8000/user/getAllUsers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDZkZTg5ZjUzMTBjMGE4OGIxMWEwM2IiLCJpYXQiOjE2ODQ5MjQ3MzJ9.sBR759S3SWlVy9xp4EhXK4P8i0DO2DWKQsW3ymgxwZ0
 
 ###
 // --- service

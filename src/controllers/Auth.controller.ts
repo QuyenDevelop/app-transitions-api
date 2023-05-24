@@ -8,9 +8,9 @@ import { env } from "../config";
 const AuthController = {
   register: async (req: express.Request, res: express.Response) => {
     try {
-      const { userName, password } = req.body;
+      const { username, password } = req.body;
       // ---- check body request
-      const exitingUser = await findAccount(userName);
+      const exitingUser = await findAccount(username);
       if (exitingUser) {
         return res.status(403).json({
           status: 403,
@@ -21,7 +21,7 @@ const AuthController = {
       // ---- create new user into database and hash password
       const hashPassword = await argon.hash(password);
       const account = await createUser({
-        userName,
+        username,
         password: hashPassword,
       });
 
@@ -43,9 +43,9 @@ const AuthController = {
   },
   login: async (req: express.Request, res: express.Response) => {
     try {
-      const { userName, password } = req.body;
+      const { username, password } = req.body;
       // ---- check body request
-      const exitingUser = await findAccount(userName);
+      const exitingUser = await findAccount(username);
       if (!exitingUser) {
         return res.status(403).json({
           status: 403,
