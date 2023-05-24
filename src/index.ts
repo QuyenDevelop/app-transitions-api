@@ -1,6 +1,6 @@
 import http from "http";
 
-import { expressConfig, mongoDBConnect } from "./config";
+import { expressConfig, mongooseConnect } from "./config";
 import routers from "./routers";
 
 const PORT = 8000;
@@ -10,7 +10,7 @@ server.listen(PORT, () => {
   console.log(`This is server listening on http://localhost:${PORT}/`);
 });
 
-mongoDBConnect()?.catch(err => console.log(err));
-// mongooseConnect()?.catch(err => console.log(err));
+// mongoDBConnect()?.catch(err => console.log(err));
+mongooseConnect()?.catch(err => console.log(err));
 
 expressConfig.use("/", routers());
