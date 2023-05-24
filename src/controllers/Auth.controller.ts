@@ -2,7 +2,7 @@ import * as argon from "argon2";
 import express from "express";
 import jwt from "jsonwebtoken";
 
-import { createUser, findAccount } from "../database";
+import { createUser, findAccount } from "../modules";
 import { env } from "../config";
 
 const AuthController = {

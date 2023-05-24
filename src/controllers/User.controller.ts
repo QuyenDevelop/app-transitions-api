@@ -1,4 +1,4 @@
-import { getUsers } from "../database";
+import { getUsers } from "../modules";
 import express from "express";
 
 const UserController = {

@@ -1,5 +1,5 @@
 import express from "express";
-import { createServices, getAllServices, updateServices } from "../database";
+import { createServices, getAllServices, updateServices } from "../modules";
 
 const ServicesController = {
   createService: async (req: express.Request, res: express.Response) => {
