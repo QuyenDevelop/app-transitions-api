@@ -2,7 +2,6 @@ import mongoose, { HydratedDocument } from "mongoose";
 import { EUserRole, IUserProfile } from "../models";
 
 type IUserRole = "admin" | "manager" | "customer" | "collaborators";
-
 interface IUser {
   username: string;
   password: string;
@@ -19,8 +18,8 @@ const _userSchema = new mongoose.Schema<IUser>({
   role: { type: String, enum: EUserRole, default: EUserRole.Customer },
   profile: {
     name: { type: String },
-    birthday: { type: Date },
-    phone: { type: String },
+    birthday: { type: String }, // String Date format DD/MM/YYYY
+    phone: { type: String, maxlength: 10 },
     address: { type: String },
     identify_code: { type: String },
     identify_address: { type: String },

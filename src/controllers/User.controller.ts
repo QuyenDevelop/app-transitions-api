@@ -88,7 +88,6 @@ const UserController = {
           success: false,
           errorMessage: "Can not find user!",
         });
-
       await updateUsersById(id, {
         lock: true,
         locked_at: Date.now(),
@@ -136,10 +135,7 @@ const UserController = {
       });
     }
   },
-  updateUserInfo: async (
-    req: express.Request<IUserProfile>,
-    res: express.Response<responseModal<null>>
-  ) => {
+  updateUserInfo: async (req: express.Request, res: express.Response) => {
     try {
       const authHeader = req.header("Authorization");
       const token = Utils.decodeAccessToken(authHeader.split(" ")[1]);

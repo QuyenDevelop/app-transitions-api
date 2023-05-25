@@ -1,27 +1,6 @@
-// ____ Authentication
-POST http://localhost:8000/auth/register
-Content-Type: application/json
-
-{
-    "username": "customer",
-    "password": "customer",
-    "role": "customer"
-}
-###
-POST http://localhost:8000/auth/login
-Content-Type: application/json
-
-{
-    "username": "cutomer",
-    "password": "cutomer"
-}
-###
-POST http://localhost:8000/auth/logout
-###
-
 // ---- users
 GET http://localhost:8000/user/get-all
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDZmMjZkYmI4ZGViY2EzZmM0N2IyZTIiLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2ODUwMDYwNjB9._0WbPeeXxIggf2sUemilYwFTEazEkJuMOn7jOnV7Qos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDZmMzg5NzFjNjRkM2Y5NTBlYTU3NDEiLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2ODUwMjY4Njh9.alddMr6inH4_dI5CG6B6ZQ-JFJgtzxEKBikTooKc22Y
 ###
 DELETE  http://localhost:8000/user/delete
 Authorization: Bearer 
@@ -48,16 +27,15 @@ Content-Type: application/json
     "id": "646f38971c64d3f950ea5741"
 }
 ###
-// --- service
-POST http://localhost:8000/service/create
+POST  http://localhost:8000/user/update-profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDZmMzg5NzFjNjRkM2Y5NTBlYTU3NDEiLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2ODUwMjUyMzd9.3kcMAP6dnEzluYJHLTAd2Xoei3_w6P7BykUAbROQQk0
 Content-Type: application/json
 
 {
-    "service_id": "RSV005",
-    "service_name": "Dịch vụ Test",
-    "unit": "room",
-    "prices": 300000,
-    "description": "Gồm: Điện chung (máy giặt, thang máy, hành lang), Vệ sinh, Rác,..."
+    "name": "Ngọc ánh",
+    "birthday": "26/05/1997",
+    "phone": "0983230190",
+    "address": "Đại Kim, Hoàng Mai, Hà Nội",
+    "identify_code": "132334819",
+    "identify_address": "Phú Thọ"
 }
-###
-GET http://localhost:8000/service/getAllServices

@@ -10,7 +10,18 @@ interface JwtPayload {
 }
 
 export const Utils = {
-  random: () => crypto.randomBytes(128).toString("base64"),
+  getPermisstionValue: (role: string) => {
+    switch (role) {
+      case EUserRole.Admin:
+        return 99;
+      case EUserRole.Manager:
+        return 3;
+      case EUserRole.Collaborators:
+        return 2;
+      default:
+        return 1;
+    }
+  },
   authentication: (salt: string, password: string) =>
     crypto
       .createHmac("sha256", [salt, password].join("/"))

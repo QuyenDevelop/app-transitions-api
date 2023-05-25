@@ -1,0 +1,14 @@
+// --- service
+POST http://localhost:8000/service/create
+Content-Type: application/json
+
+{
+    "service_id": "RSV005",
+    "service_name": "Dịch vụ Test",
+    "unit": "room",
+    "prices": 300000,
+    "description": "Gồm: Điện chung (máy giặt, thang máy, hành lang), Vệ sinh, Rác,..."
+}
+###
+GET http://localhost:8000/service/get-all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDZmMzg5NzFjNjRkM2Y5NTBlYTU3NDEiLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2ODUwMjY4Njh9.alddMr6inH4_dI5CG6B6ZQ-JFJgtzxEKBikTooKc22Y

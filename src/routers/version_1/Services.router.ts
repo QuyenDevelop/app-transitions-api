@@ -1,15 +1,26 @@
 import express from "express";
 import { ServicesController } from "../../controllers";
-import { isPermissionManage } from "../../middleWares";
+import { isAuthenticated, isPermissionManage } from "../../middleWares";
+import {} from "../../middleWares/index";
 
 const ServicesRouter = (router: express.Router) => {
   router.post(
     "/service/create",
+    isAuthenticated,
     isPermissionManage,
     ServicesController.createService
   );
-  router.get("/service/getAllServices", ServicesController.getAllServices);
-  router.get("/service/update-service", ServicesController.updateService);
+  router.get(
+    "/service/get-all",
+    isAuthenticated,
+    ServicesController.getAllServices
+  );
+  router.get(
+    "/service/update-service",
+    isAuthenticated,
+    isPermissionManage,
+    ServicesController.updateService
+  );
 };
 
 export default ServicesRouter;

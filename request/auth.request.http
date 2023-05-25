@@ -1,0 +1,20 @@
+// ____ Authentication
+POST http://localhost:8000/auth/register
+Content-Type: application/json
+
+{
+    "username": "customer123",
+    "password": "customer123",
+    "role": "customer"
+}
+###
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{
+    "username": "customer",
+    "password": "customer"
+}
+###
+POST http://localhost:8000/auth/logout
+###
