@@ -1,11 +1,11 @@
 import express from "express";
 import { ServicesController } from "../../controllers";
-import { isPermission } from "../../middleWares";
+import { isPermissionManage } from "../../middleWares";
 
 const ServicesRouter = (router: express.Router) => {
   router.post(
     "/service/create",
-    isPermission,
+    isPermissionManage,
     ServicesController.createService
   );
   router.get("/service/getAllServices", ServicesController.getAllServices);

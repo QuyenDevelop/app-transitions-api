@@ -2,42 +2,44 @@ import * as argon from "argon2";
 import express from "express";
 import jwt from "jsonwebtoken";
 
-import { createUser, findAccount } from "../modules";
 import { env } from "../config";
+import { findUsers, signUpNewUser } from "../modules/Users.modules";
+import { EUserRole } from "../models";
 
 const AuthController = {
   register: async (req: express.Request, res: express.Response) => {
     try {
-      const { username, password } = req.body;
+      const { username, password, role } = req.body;
       // ---- check body request
-      const exitingUser = await findAccount(username);
+      const exitingUser = await findUsers(username);
       if (exitingUser) {
         return res.status(403).json({
-          status: 403,
+          success: false,
           errorMessage: "Username already used!!",
         });
       }
 
       // ---- create new user into database and hash password
       const hashPassword = await argon.hash(password);
-      const account = await createUser({
-        username,
+      const account = await signUpNewUser({
+        username: username,
         password: hashPassword,
+        role: role || EUserRole.Customer,
       });
 
       // ---- return token
       const accessToken = jwt.sign({ userId: account._id }, env.TOKEN_SECRET);
       return res
         .json({
-          status: 200,
-          error_message: "",
+          success: true,
           accessToken,
+          data: account,
         })
         .end();
-    } catch (_error) {
-      return res.status(400).json({
-        status: 400,
-        errorMessage: "Internal Server Error",
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        errorMessage: "Internal Server Error!!",
       });
     }
   },
@@ -45,10 +47,10 @@ const AuthController = {
     try {
       const { username, password } = req.body;
       // ---- check body request
-      const exitingUser = await findAccount(username);
+      const exitingUser = await findUsers(username);
       if (!exitingUser) {
         return res.status(403).json({
-          status: 403,
+          success: false,
           errorMessage: "Incorrect username or password!",
         });
       }
@@ -67,20 +69,23 @@ const AuthController = {
 
       // ---- return token
       const accessToken = jwt.sign(
-        { userId: exitingUser._id },
+        {
+          userId: exitingUser._id,
+          role: exitingUser.role,
+        },
         env.TOKEN_SECRET
       );
       return res
         .json({
-          status: 200,
+          success: true,
           error_message: "",
           accessToken,
         })
         .end();
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        errorMessage: "Internal Server Error!",
+      return res.status(500).json({
+        success: false,
+        errorMessage: "Internal Server Error!!",
       });
     }
   },

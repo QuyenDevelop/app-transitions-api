@@ -1,4 +1,2 @@
-import Utils from "./utils";
-
-export { Utils };
+export { Utils } from "./utils";
 export { AuthValidate } from "./validation";

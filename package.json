@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint src",
     "start": "nodemon",
+    "debug": "node inspect",
     "dev": "nodemon index",
     "build": "tsc"
   },
@@ -43,6 +44,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
+    "redis": "^4.6.6",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   }
