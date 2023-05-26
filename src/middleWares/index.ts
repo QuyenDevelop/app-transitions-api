@@ -41,7 +41,7 @@ export const isPermissionManage = async (
 
     return next();
   } catch (error) {
-    return res.status(400).json({ errorMessage: "Invalid Token!" });
+    return res.status(400).json({ errorMessage: "Internal Server Error!!" });
   }
 };
 
@@ -59,8 +59,6 @@ export const isPermissionAdmin = async (
     }
     return next();
   } catch (error) {
-    return res
-      .status(400)
-      .json({ error_code: 400, error_message: error.message });
+    return res.status(400).json({ errorMessage: "Internal Server Error!!" });
   }
 };

@@ -1,4 +1,5 @@
 import express from "express";
+import { CONSTANT } from "../config/Constant";
 import {
   deleteAllUser,
   deleteOneUser,
@@ -7,7 +8,6 @@ import {
   updateUsersById,
 } from "../modules";
 import { Utils } from "../utils";
-import { IUserProfile, responseModal } from "../models";
 
 const UserController = {
   getAllUsers: async (_req: express.Request, res: express.Response) => {
@@ -17,7 +17,7 @@ const UserController = {
     } catch (error) {
       return res.status(400).json({
         success: false,
-        errorMessage: "Internal Server Error!!",
+        errorCode: CONSTANT.INTERNAL_SERVICE_ERROR,
       });
     }
   },
@@ -25,23 +25,30 @@ const UserController = {
     try {
       const authHeader = req.header("Authorization");
       const token = Utils.decodeAccessToken(authHeader.split(" ")[1]);
-      const users = await getUsersById(token.userId);
+      const user = await getUsersById(token.userId);
       return res.status(200).json({
         success: true,
-        errorMessage: "",
-        data: users.profile,
+        errorCode: "",
+        data: {
+          full_name: user.full_name,
+          phone: user.phone,
+          birthday: user.birthday,
+          address: user.address,
+          role: user.role,
+          isActive: user.isActive,
+          isLock: user.isLock,
+          identify_code: user.identify_code,
+          identify_address: user.identify_address,
+        },
       });
     } catch (error) {
       return res.status(400).json({
         success: false,
-        errorMessage: "Internal Server Error!!",
+        errorCode: CONSTANT.INTERNAL_SERVICE_ERROR,
       });
     }
   },
-  deleteOneUser: async (
-    req: express.Request,
-    res: express.Response<responseModal<null>>
-  ) => {
+  deleteOneUser: async (req: express.Request, res: express.Response) => {
     try {
       const authHeader = req.header("Authorization");
       const token = Utils.decodeAccessToken(authHeader.split(" ")[1]);
@@ -49,13 +56,13 @@ const UserController = {
       await deleteOneUser(token.userId);
       return res.status(200).json({
         success: true,
-        errorMessage: "",
+        errorCode: "",
         data: null,
       });
     } catch (error) {
       return res.status(400).json({
         success: false,
-        errorMessage: "Internal Server Error!!",
+        errorCode: CONSTANT.INTERNAL_SERVICE_ERROR,
         data: null,
       });
     }
@@ -65,12 +72,12 @@ const UserController = {
       await deleteAllUser();
       return res.status(200).json({
         success: true,
-        errorMessage: "",
+        errorCode: "",
       });
     } catch (error) {
       return res.status(400).json({
         success: false,
-        errorMessage: "Internal Server Error!!",
+        errorCode: CONSTANT.INTERNAL_SERVICE_ERROR,
       });
     }
   },
@@ -80,13 +87,13 @@ const UserController = {
       if (!id)
         return res.status(401).json({
           success: false,
-          errorMessage: "Bad request!",
+          errorCode: "Bad request!",
         });
       const user = await getUsersById(id);
       if (!user)
-        return res.status(401).json({
+        return res.status(403).json({
           success: false,
-          errorMessage: "Can not find user!",
+          errorCode: "Can not find user!",
         });
       await updateUsersById(id, {
         lock: true,
@@ -95,28 +102,23 @@ const UserController = {
 
       return res.status(200).json({
         success: true,
-        errorMessage: "",
+        errorCode: "",
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         success: false,
-        errorMessage: "Internal Server Error!!",
+        errorCode: "Internal Server Error!!",
       });
     }
   },
   unlockedUser: async (req: express.Request, res: express.Response) => {
     try {
       const id = req.body.id;
-      if (!id)
-        return res.status(401).json({
-          success: false,
-          errorMessage: "Bad request!",
-        });
       const user = await getUsersById(id);
       if (!user)
-        return res.status(401).json({
+        return res.status(403).json({
           success: false,
-          errorMessage: "Can not find user!",
+          errorCode: "Can not find user!",
         });
 
       await updateUsersById(id, {
@@ -126,12 +128,12 @@ const UserController = {
 
       return res.status(200).json({
         success: true,
-        errorMessage: "",
+        errorCode: "",
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         success: false,
-        errorMessage: "Internal Server Error!!",
+        errorCode: CONSTANT.INTERNAL_SERVICE_ERROR,
       });
     }
   },
@@ -141,21 +143,19 @@ const UserController = {
       const token = Utils.decodeAccessToken(authHeader.split(" ")[1]);
 
       await updateUsersById(token.userId, {
-        profile: {
-          ...req.body,
-          last_update: Date.now(),
-        },
+        ...req.body,
+        last_update: Date.now(),
       });
 
       return res.status(200).json({
         success: true,
-        errorMessage: "",
+        errorCode: "",
         data: null,
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         success: false,
-        errorMessage: "Internal Server Error!!",
+        errorCode: CONSTANT.INTERNAL_SERVICE_ERROR,
         data: null,
       });
     }

@@ -1,2 +1,3 @@
 export * from "./enum";
-export * from "./modal";
+export * from "./interfaces";
+export * from "./type";
