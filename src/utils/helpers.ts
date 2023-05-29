@@ -1,3 +1,5 @@
-import express from "express";
+import crypto from "crypto";
 
-export const helpers = {};
+export const Helpers = {
+  randomID: () => crypto.randomUUID(),
+};

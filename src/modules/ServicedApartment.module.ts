@@ -1,21 +1,20 @@
-import { IAddress } from "../models";
+import { IAddress, IUserProfile } from "../models";
 import mongoose from "mongoose";
 
-interface IServicedApartment {
-  sa_id: string;
+export interface IServicedApartment {
+  sa_name: string;
   // ---- người quản lý
   manager: string;
   // ---- chủ sở hữu
-  owner: string;
-  sa_name: string;
+  owner: IUserProfile;
   address: IAddress;
-  prices: string;
+  prices: number;
   status: boolean;
+  create_at: Date;
   description: string;
 }
 
 const ServicedApartmentSchema = new mongoose.Schema<IServicedApartment>({
-  sa_id: { type: String, required: true },
   sa_name: { type: String, required: true },
   address: {
     address_detail: { type: String },
@@ -23,15 +22,16 @@ const ServicedApartmentSchema = new mongoose.Schema<IServicedApartment>({
     district: { type: String },
     ward: { type: String },
   },
-  prices: { type: String },
+  prices: { type: Number },
   status: { type: Boolean },
+  create_at: { type: Date, default: Date.now },
   manager: {},
   owner: {},
   description: { type: String },
 });
 
 export const ServicedApartmentModel = mongoose.model<IServicedApartment>(
-  "ServicedApartment",
+  "Houses",
   ServicedApartmentSchema
 );
 // ---- create
@@ -42,19 +42,22 @@ export const createServicedApartment = async (value: Record<string, any>) => {
 
 // ----- read
 export const getAllServicedApartment = () => ServicedApartmentModel.find();
-export const getDetailServicedApartment = (sa_id: string) => {
-  return ServicedApartmentModel.findOne({ sa_id }).exec();
+export const getDetailServicedApartment = (id: string) => {
+  return ServicedApartmentModel.findOne({ _id: id }).exec();
 };
 
 // ----- update
 export const updateServicedApartment = (
-  sa_id: string,
+  id: string,
   value: Record<string, any>
 ) => {
-  return ServicedApartmentModel.findOneAndUpdate({ sa_id }, value).exec();
+  return ServicedApartmentModel.findOneAndUpdate({ _id: id }, value).exec();
 };
 
 // ----- delete
-export const deleteServicedApartment = (service_id: string) => {
-  return ServicedApartmentModel.findByIdAndRemove({ service_id }).exec();
+export const deleteServicedApartment = (id: string) => {
+  return ServicedApartmentModel.findByIdAndRemove({ _id: id }).exec();
+};
+export const deleteAll = () => {
+  return ServicedApartmentModel.deleteMany({}).exec();
 };

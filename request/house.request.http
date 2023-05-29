@@ -1,0 +1,36 @@
+// ____ Authentication
+POST http://localhost:8000/service-house/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDc0NzY3MTA2OGYxMWY1MDYwNGVjZmYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODUzNTQ2MTl9.HsSS8uOrLF4dg8HU0KehX6IbxDMMIdFu1kWkKHvhWwc
+Content-Type: application/json
+
+{
+    "name": "250 kim giang",
+    "address": {
+        "address_detail": "nhà 250 kim giang",
+        "province": "Hà Nội",
+        "district": "Hoàng Mai",
+        "ward": "Đại kim"
+    },
+    "prices": 14000000,
+    "description": "Chung cư mini, gồm 6 tâng và 21 phòng, có nhà xe và sân phơi",
+    "owner": {
+        "name": "Nguyễn A",
+        "birthday": "29/02/1996",
+        "phone": "0987654321    ",
+        "address": "Phường 8, quận 7, Hồ Chí Minh city",
+        "identify_code": "123654879",
+        "identify_address": "Hồ Chí Minh city"
+    },
+    "manager":"USER002"
+}
+###
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{
+    "username": "customer",
+    "password": "customer"
+}
+###
+POST http://localhost:8000/auth/logout
+###

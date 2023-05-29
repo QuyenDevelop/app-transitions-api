@@ -55,7 +55,7 @@ const AuthController = {
       if (!user) {
         return res.status(403).json({
           success: false,
-          errorCode: "INTERNAL_SERVER_ERROR",
+          errorCode: "INVALID_ACCOUNT",
         });
       }
       if (user.isLock) {
@@ -64,7 +64,7 @@ const AuthController = {
           errorMessage: "ACCOUNT_LOCKED",
         });
       }
-      if (user.isActive) {
+      if (!user.isActive) {
         return res.status(403).json({
           success: false,
           errorMessage: "ACCOUNT_NOT_ACTIVE",

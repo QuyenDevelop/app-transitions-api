@@ -1,0 +1,20 @@
+POST http://localhost:8000/room/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDc0NzY3MTA2OGYxMWY1MDYwNGVjZmYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODUzNTQ2MTl9.HsSS8uOrLF4dg8HU0KehX6IbxDMMIdFu1kWkKHvhWwc
+Content-Type: application/json
+
+{
+    "houseId": "647480d3caa177c02885e61b",
+    "name": "P202",
+    "type": "Garret",
+    "prices": 3000000,
+    "description": "Phong gác xếp, diện tích 30m2"
+}
+###
+GET http://localhost:8000/room/get-all
+###
+GET http://localhost:8000/room/get-list-by-house
+Content-Type: application/json
+
+{
+    "houseId": "647480d3caa177c02885e61b"
+}

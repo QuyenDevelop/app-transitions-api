@@ -38,6 +38,7 @@ const UserRouter = (router: express.Router) => {
     isAuthenticated,
     UserController.updateUserInfo
   );
+  router.post("/user/active-user", UserController.activeUser);
 };
 
 export default UserRouter;

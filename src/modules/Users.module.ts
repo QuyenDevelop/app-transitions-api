@@ -29,13 +29,13 @@ export const userModel = mongoose.model("User", _userSchema);
 // create
 export const signUpNewUser = async (value: Record<string, any>) => {
   const newUser = new userModel(value);
-  await newUser.save();
-  return newUser;
+  await newUser.save()?.catch(err => console.log(err));
+  return newUser.toObject();
 };
 
 // read
-export const findUsers = (username: string) => {
-  return userModel.findOne({ username: username });
+export const findUsers = (phone: string) => {
+  return userModel.findOne({ phone: phone });
 };
 export const getUsersById = (id: string) => {
   return userModel.findOne({ _id: id });

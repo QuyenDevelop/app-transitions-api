@@ -1,11 +1,12 @@
+import { ERoomType } from "../models";
 import mongoose from "mongoose";
 
 const IRoomSchema = new mongoose.Schema({
-  room_id: { type: String, required: true },
-  sa_id: {},
+  sa_id: { type: String, required: true },
   room_name: { type: String },
+  room_type: { type: String, enum: ERoomType, require: true },
   prices: { type: Number },
-  status: { type: Boolean },
+  status: { type: Boolean, default: true },
   description: { type: String },
 });
 
@@ -18,16 +19,22 @@ export const createRoom = async (value: Record<string, any>) => {
 
 // ----- read
 export const getListRoom = () => RoomModel.find();
+export const getListRoomByHouseId = (houseId: string) => {
+  return RoomModel.find({ sa_id: houseId });
+};
 export const getDetailRoom = (id: string) => {
-  return RoomModel.findOne({ room_id: id }).exec();
+  return RoomModel.findOne({ _id: id }).exec();
 };
 
 // ----- update
 export const updateRoom = (id: string, value: Record<string, any>) => {
-  return RoomModel.findOneAndUpdate({ room_id: id }, value).exec();
+  return RoomModel.findOneAndUpdate({ _id: id }, value).exec();
 };
 
 // ----- delete
 export const deleteRoom = (id: string) => {
-  return RoomModel.findByIdAndRemove({ room_id: id }).exec();
+  return RoomModel.findByIdAndRemove({ _id: id }).exec();
+};
+export const deleteAllRoom = () => {
+  return RoomModel.deleteMany({}).exec();
 };

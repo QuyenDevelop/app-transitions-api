@@ -81,6 +81,30 @@ const UserController = {
       });
     }
   },
+  activeUser: async (req: express.Request, res: express.Response) => {
+    try {
+      const id = req.body.id;
+      // const user = await getUsersById(id);
+      // if (!user)
+      //   return res.status(403).json({
+      //     success: false,
+      //     errorCode: "Can not find user!",
+      //   });
+      await updateUsersById(id, {
+        isActive: true,
+      });
+
+      return res.status(200).json({
+        success: true,
+        errorCode: "",
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        errorCode: CONSTANT.INTERNAL_SERVICE_ERROR,
+      });
+    }
+  },
   lockedUser: async (req: express.Request, res: express.Response) => {
     try {
       const id = req.body.id;
