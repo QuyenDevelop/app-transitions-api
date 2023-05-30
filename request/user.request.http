@@ -28,16 +28,19 @@ Content-Type: application/json
 }
 ###
 POST  http://localhost:8000/user/update-profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDc0NzY3MTA2OGYxMWY1MDYwNGVjZmYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODUzNTQ2MTl9.HsSS8uOrLF4dg8HU0KehX6IbxDMMIdFu1kWkKHvhWwc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDc1NjFmYjAwNDcxNzAxYzJjZjk5NjciLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODU0MTQ3OTZ9.6gfPaa7E-0Kku76v4oDWO258S1nXeNPJxK7_rN8ExxU
 Content-Type: application/json
 
 {
-    "name": "Ngọc ánh",
-    "birthday": "26/05/1997",
-    "phone": "0983230190",
-    "address": "Đại Kim, Hoàng Mai, Hà Nội",
-    "identify_code": "132334819",
-    "identify_address": "Phú Thọ"
+    "birthday": "09/08/1997",
+    "address": {
+        "address_detail": "",
+        "province": "Phú Thọ",
+        "district": "Thanh Thủy",
+        "ward": "Tu Vũ"
+    },
+    "identify_code": "025097011051",
+    "identify_address": "Cục cảnh sát"
 }
 
 ###

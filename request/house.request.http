@@ -24,13 +24,12 @@ Content-Type: application/json
     "manager":"USER002"
 }
 ###
-POST http://localhost:8000/auth/login
+GET http://localhost:8000/service-house/get-detail
 Content-Type: application/json
 
 {
-    "username": "customer",
-    "password": "customer"
+    "id": "64747922249667682935455b"
 }
 ###
-POST http://localhost:8000/auth/logout
+GET http://localhost:8000/service-house/get-all
 ###

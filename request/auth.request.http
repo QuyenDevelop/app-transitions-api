@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "phone": "0968097564",
     "password": "admin",
-    "full_name": "administrator",
+    "full_name": "Phạm Hồng Quyền",
     "role": "admin"
 }
 ###

@@ -63,7 +63,6 @@ const ServiceHouseController = {
     const { id } = req.body;
     try {
       const serviceHouse = await getDetailServicedApartment(id);
-      console.log("🚀 ~ serviceHouse:", serviceHouse);
       if (!serviceHouse) {
         return res.status(403).json({
           success: false,

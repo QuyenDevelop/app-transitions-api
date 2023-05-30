@@ -23,10 +23,17 @@ const ServicedApartmentSchema = new mongoose.Schema<IServicedApartment>({
     ward: { type: String },
   },
   prices: { type: Number },
-  status: { type: Boolean },
+  status: { type: Boolean, default: true },
   create_at: { type: Date, default: Date.now },
-  manager: {},
-  owner: {},
+  manager: { type: String },
+  owner: {
+    name: { type: String },
+    birthday: { type: String },
+    phone: { type: String },
+    address: { type: String },
+    identify_code: { type: String },
+    identify_address: { type: String },
+  },
   description: { type: String },
 });
 
